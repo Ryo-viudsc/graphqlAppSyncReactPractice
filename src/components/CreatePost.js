@@ -21,11 +21,13 @@ class CreatePost extends Component {
 
   };
 
+  //UTILITY FUNCTION TO KEEP UPDATING THE STATE INFO 
+  //EVEN WHILE USERS ARE TYPING 
   //all this do is to add items to instances 
   //retrieve the info and set it to the state 
   handleChangePost = event => this.setState({
     [event.target.name] : event.target.value
-  
+    
   });
 
 
@@ -36,15 +38,16 @@ class CreatePost extends Component {
       //called on the event when submitting the form to prevent a browser reload/refresh. 
        
       const input = {
-          postOwnerId: this.state.postOwnerId,
-          postOwnerUsername: this.state.postOwnerUsername,
+          postOwnerId: "Ryo test",//this.state.postOwnerId,
+          postOwnerUsername: "Ryo Kihara", // this.state.postOwnerUsername,
           posttitle : this.state.postTitle,
           postBody: this.state.postBody,
           createdAt: new Date().toISOString()
       };
-
+      
       await API.graphql(graphqlOperation(createPost, { input }));
 
+      //clean the state 
       this.setState({postTitle: "", postBody: ""});
 
   } 
@@ -54,12 +57,17 @@ class CreatePost extends Component {
   render(){
       return(
         <form className="add-post"
-              onSubmit={this.handleAddPost()}
+              onSubmit={this.handleAddPost}
         >
             <input style={{font: '19px'}}
                 type="text" placeholder="Title"
                 name="postTitle"
                 required
+                value={this.state.postTitle}//attach the state
+                onChange={this.handleChangePost} //we need this
+                //make sure as things change, we want to invoke the handle function 
+                //take the information and put it into the array
+
               />
             <textarea
               type="text"
@@ -67,6 +75,9 @@ class CreatePost extends Component {
               rows="3"
               cols="40"
               placeholder="New Blog Post" 
+              value={this.state.postBody}
+              onChange={this.handleChangePost}
+              //note handleChangePost is the utility function 
              />
 
             <input 
