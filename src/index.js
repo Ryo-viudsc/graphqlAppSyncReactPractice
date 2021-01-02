@@ -4,6 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
+//set up amplify 
+import Amplify from 'aws-amplify';
+//setting up the aws_exports setting using amplify.configure
+import aws_exports from './aws-exports';
+
+Amplify.configure(aws_exports);
+
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
