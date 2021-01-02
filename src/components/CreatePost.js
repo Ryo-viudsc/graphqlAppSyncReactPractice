@@ -44,7 +44,6 @@ class CreatePost extends Component {
           postBody: this.state.postBody,
           createdAt: new Date().toISOString()
       };
-      
       await API.graphql(graphqlOperation(createPost, { input }));
 
       //clean the state 
@@ -65,8 +64,6 @@ class CreatePost extends Component {
                 required
                 value={this.state.postTitle}//attach the state
                 onChange={this.handleChangePost} //we need this
-                //make sure as things change, we want to invoke the handle function 
-                //take the information and put it into the array
 
               />
             <textarea
@@ -77,7 +74,6 @@ class CreatePost extends Component {
               placeholder="New Blog Post" 
               value={this.state.postBody}
               onChange={this.handleChangePost}
-              //note handleChangePost is the utility function 
              />
 
             <input 
