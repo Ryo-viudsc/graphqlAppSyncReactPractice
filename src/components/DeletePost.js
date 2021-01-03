@@ -4,7 +4,16 @@ import { deletePost } from "../graphql/mutations";
 
 
 
+
 class DeletePost extends Component {
+
+
+
+      componentDidMount = async () => {
+
+
+
+      }
 
 
      handleDeletePost = async postId => {

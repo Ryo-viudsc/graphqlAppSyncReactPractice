@@ -5,6 +5,10 @@ import React, {Component} from "react";
 //auto generated files "queries.js"
 import { listPosts } from "../graphql/queries";
 import { onCreatePost } from "../graphql/subscriptions";
+
+//for subscription 
+import {onDeletePost} from "../graphql/subscriptions";
+
 import { API, graphqlOperation } from 'aws-amplify';
 import DeletePost from "./DeletePost";
 import EditPost from "./EditPost";
@@ -44,11 +48,26 @@ class DisplayPosts extends Component {
 
               } //we have the correct post in the right position
           })
+
+
+      //lisner always should be on the display components
+      this.deletePostListener = API.graphql(graphqlOperation(onDeletePost))    
+          .subscribe({
+            next: postData => {
+                
+              const deletedPost = postData.value.data.onDeletePost;
+              const updatedPosts = this.state.posts.filter(post => post.id !== deletedPost.id);
+
+              this.setState({posts:updatedPosts});
+
+            }
+          })
   }
   
 
   componentWillUnmount(){
     this.createPostListener.unsubscribe();
+    this.deletePostListener.unsubscribe();
   }
 
 
