@@ -14,7 +14,7 @@ class DeletePost extends Component {
 
         //delete the actual post in the dynamoDB 
         //NOTE : payload has to be passed as "object"
-        await API.graphql(graphqlOperation(deletePost, input))
+        await API.graphql(graphqlOperation(deletePost, {input}))
 
      }
 
