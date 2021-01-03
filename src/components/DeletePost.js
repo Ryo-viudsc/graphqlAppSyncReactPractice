@@ -23,7 +23,7 @@ class DeletePost extends Component {
 
         return (
           <button
-            oClick={()=>{ this.handleDeletePost(post.id) }}
+            onClick={()=>{ this.handleDeletePost(post.id) }}
           >Delete
           </button>
         )
