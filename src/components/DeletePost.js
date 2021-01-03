@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { API, graphqlOperation } from 'aws-amplify';
+import { deletePost } from "../graphql/mutations";
 
 
 
