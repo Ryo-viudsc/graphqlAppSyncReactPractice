@@ -15,8 +15,16 @@ class CreatePost extends Component {
    
   componentDidMount = async () => {
       //Todo 
+    //to get the current users 
 
-      
+    await Auth.currentUserInfo() // because it's promise  
+          .then(user=>{
+              console.log("current user is : ",  user.username);
+              console.log("inside of the user is : ",  user);
+          })
+
+
+
 
 
   };
