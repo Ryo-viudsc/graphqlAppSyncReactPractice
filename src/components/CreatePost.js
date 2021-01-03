@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {createPost} from "../graphql/mutations";
-import { API, graphqlOperation } from 'aws-amplify';
+import { API, graphqlOperation, Auth } from 'aws-amplify';
 
 
 
@@ -14,18 +14,19 @@ class CreatePost extends Component {
   }
    
   componentDidMount = async () => {
-      //Todo 
+    //Todo 
     //to get the current users 
 
     await Auth.currentUserInfo() // because it's promise  
           .then(user=>{
               console.log("current user is : ",  user.username);
-              console.log("inside of the user is : ",  user);
+              console.log("inside of the user is : ",  user.attributes.sub);
+              this.setState({
+                postOwnerId : user.attributes.sub,
+                postOwnerUsername: user.username
+              })
+
           })
-
-
-
-
 
   };
 
@@ -46,8 +47,8 @@ class CreatePost extends Component {
       //called on the event when submitting the form to prevent a browser reload/refresh. 
        
       const input = {
-          postOwnerId: "Ryo test",//this.state.postOwnerId,
-          postOwnerUsername: "Ryo Kihara", // this.state.postOwnerUsername,
+          postOwnerId: this.state.postOwnerId,//this.state.postOwnerId,
+          postOwnerUsername: this.state.postOwnerUsername, // this.state.postOwnerUsername,
           postTitle : this.state.postTitle,
           postBody: this.state.postBody,
           createdAt: new Date().toISOString()
