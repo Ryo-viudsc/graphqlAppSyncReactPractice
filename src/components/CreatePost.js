@@ -16,7 +16,7 @@ class CreatePost extends Component {
   componentDidMount = async () => {
       //Todo 
 
-
+      
 
 
   };
@@ -40,7 +40,7 @@ class CreatePost extends Component {
       const input = {
           postOwnerId: "Ryo test",//this.state.postOwnerId,
           postOwnerUsername: "Ryo Kihara", // this.state.postOwnerUsername,
-          posttitle : this.state.postTitle,
+          postTitle : this.state.postTitle,
           postBody: this.state.postBody,
           createdAt: new Date().toISOString()
       };

@@ -4,6 +4,7 @@ import React, {Component} from "react";
 //you can see each function from the 
 //auto generated files "queries.js"
 import { listPosts } from "../graphql/queries";
+import { onCreatePost } from "../graphql/subscriptions";
 import { API, graphqlOperation } from 'aws-amplify';
 import DeletePost from "./DeletePost";
 import EditPost from "./EditPost";
@@ -25,8 +26,32 @@ class DisplayPosts extends Component {
   //cuz we want them to happen in the desired order 
   componentDidMount = async () => {
       this.getPosts();
+
+      //post Listener 
+      //we have to unmount the listner later 
+      this.createPostListener = API.graphql(graphqlOperation(onCreatePost))
+          .subscribe({
+              next : postData => {
+                //console.log({provider, value});
+                const newPost = postData.value.data.onCreatePost;
+                const prevPosts = this.state.posts.filter(post => post.id !== newPost.id)
+                //just to get all the previous posts here 
+
+                //spread operator
+                const updatedPosts = [newPost, ...prevPosts];
+                
+                this.setState({ posts: updatedPosts});
+
+              } //we have the correct post in the right position
+          })
   }
   
+
+  componentWillUnmount(){
+    this.createPostListener.subscribe;
+  }
+
+
 //   (alias) graphqlOperation(query: any, variables?: {}): {
 //     query: any;
 //     variables: {};
