@@ -4,7 +4,7 @@ import React, {Component} from "react";
 //you can see each function from the 
 //auto generated files "queries.js"
 import { listPosts } from "../graphql/queries";
-import { onCreatePost } from "../graphql/subscriptions";
+import { onCreatePost, onUpdatePost } from "../graphql/subscriptions";
 
 //for subscription 
 import {onDeletePost} from "../graphql/subscriptions";
@@ -62,28 +62,43 @@ class DisplayPosts extends Component {
 
             }
           })
+
+       this.updatePostListener = API.graphql(graphqlOperation(onUpdatePost))
+            .subscribe({
+              next: postData => {
+                const {posts} = this.state; 
+                const updatePost = postData.value.data.onUpdatePost;
+                //const updatedPosts = this.state.posts.filter(post => post.id);
+                //create var index 
+                //the post that i have in array is unique 
+                //so that I can re-organize the array 
+                const index = posts.findIndex(post => post.id === updatePost.id);
+                const updatePosts = [
+                  ...posts.slice(0,index),
+                  updatePost,
+                  ...posts.slice(index+1)
+                ]; 
+                this.setState({posts : updatePosts});
+              }
+                
+
+            })
   }
   
 
   componentWillUnmount(){
     this.createPostListener.unsubscribe();
     this.deletePostListener.unsubscribe();
+    this.updatePostListener.unsubscribe();
   }
 
-
-//   (alias) graphqlOperation(query: any, variables?: {}): {
-//     query: any;
-//     variables: {};
-// }
 
   getPosts = async () => {
     //we need to put graphql operation inside of the brackets 
         const result = await API.graphql(graphqlOperation(listPosts))
         console.log("All posts: ", JSON.stringify(result.data.listPosts.items))
-        
-
         this.setState({posts: result.data.listPosts.items});
-      }
+  }
 
 
   render () {
@@ -91,10 +106,8 @@ class DisplayPosts extends Component {
     //state distraction 
     const {posts} = this.state;
 
-
-
     return (
-      posts.map((post)=>{
+      posts.map((post) => {
         return (
           <div className="posts" style={rowStyle}  key= {post.id}>
               <h1>{post.postTitle}</h1>
@@ -105,11 +118,11 @@ class DisplayPosts extends Component {
                 { new Date(post.createdAt).toDateString()}
               </time>
               </span>
-              <p>{post.postBody}</p>
+              <p>{ post.postBody }</p>
               <br />
               <span>
                   <DeletePost data={post}/>
-                  <EditPost />
+                  <EditPost {...post} />
               </span>
           </div>
         )
@@ -124,7 +137,6 @@ const rowStyle = {
   padding: '10px',
   border: '1px #ccc dotted',
   margin: '14px'
-
 }
 
 
