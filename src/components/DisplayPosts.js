@@ -12,7 +12,7 @@ import {onDeletePost} from "../graphql/subscriptions";
 import { API, graphqlOperation } from 'aws-amplify';
 import DeletePost from "./DeletePost";
 import EditPost from "./EditPost";
-import CreateCommentPost from "./CreateCommmentPost";
+import CreateCommentPost from "./CreateCommentPost.js";
 
 
 //API allows us to fetch the actual API that we've created 
@@ -104,6 +104,8 @@ class DisplayPosts extends Component {
     //state distraction 
     const {posts} = this.state;
 
+
+    //mapping post here 
     return (
       posts.map((post) => {
         return (
@@ -123,7 +125,7 @@ class DisplayPosts extends Component {
                   <EditPost {...post} />
               </span>
               <span>
-                    <CreateCommentPost /> 
+                    <CreateCommentPost  postId={post.id} /> 
               </span>
           </div>
         )

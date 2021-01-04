@@ -88,8 +88,6 @@ class CreateCommentPost extends Compoent {
                       style={{ fontSize : '19px'}}
                       value="Add Comment"
                     />
-
-
               </form>
           </div>
       )
