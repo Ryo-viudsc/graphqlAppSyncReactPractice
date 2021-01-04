@@ -33,7 +33,7 @@ class CreatePost extends Component {
   //all this do is to add items to instances 
   //retrieve the info and set it to the state 
   handleChangePost = event => this.setState({
-    [event.target.name] : event.target.value;
+    [event.target.name] : event.target.value
   });
 
 
@@ -55,7 +55,7 @@ class CreatePost extends Component {
 
       //clean the state 
       this.setState({postTitle: "", postBody: ""});
-      
+
   } 
 
 

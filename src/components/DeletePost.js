@@ -13,11 +13,10 @@ class DeletePost extends Component {
         const input = { 
           id : postId
         }
-
+        
         //delete the actual post in the dynamoDB 
         //NOTE : payload has to be passed as "object"
-        await API.graphql(graphqlOperation(deletePost, {input}))
-
+        await API.graphql(graphqlOperation(deletePost, {input}));
      }
 
 

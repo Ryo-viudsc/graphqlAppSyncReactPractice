@@ -12,6 +12,7 @@ import {onDeletePost} from "../graphql/subscriptions";
 import { API, graphqlOperation } from 'aws-amplify';
 import DeletePost from "./DeletePost";
 import EditPost from "./EditPost";
+import CreateCommentPost from "./CreateCommmentPost";
 
 
 //API allows us to fetch the actual API that we've created 
@@ -43,7 +44,6 @@ class DisplayPosts extends Component {
 
                 //spread operator
                 const updatedPosts = [newPost, ...prevPosts];
-                
                 this.setState({ posts: updatedPosts});
 
               } //we have the correct post in the right position
@@ -80,8 +80,6 @@ class DisplayPosts extends Component {
                 ]; 
                 this.setState({posts : updatePosts});
               }
-                
-
             })
   }
   
@@ -106,7 +104,6 @@ class DisplayPosts extends Component {
     //state distraction 
     const {posts} = this.state;
 
-    
     return (
       posts.map((post) => {
         return (
@@ -124,6 +121,9 @@ class DisplayPosts extends Component {
               <span>
                   <DeletePost data={post}/>
                   <EditPost {...post} />
+              </span>
+              <span>
+                    <CreateCommentPost /> 
               </span>
           </div>
         )
