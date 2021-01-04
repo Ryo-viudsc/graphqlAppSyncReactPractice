@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Auth, API, graphqlOperation} from "aws-amplify";
-
+import {updatePost} from "../graphql/mutations";
 
 
 class EditPost extends Component {

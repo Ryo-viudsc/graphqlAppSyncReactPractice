@@ -68,7 +68,7 @@ class DisplayPosts extends Component {
               next: postData => {
                 const {posts} = this.state; 
                 const updatePost = postData.value.data.onUpdatePost;
-                //const updatedPosts = this.state.posts.filter(post => post.id);
+
                 //create var index 
                 //the post that i have in array is unique 
                 //so that I can re-organize the array 
