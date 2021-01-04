@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {createPost} from "../graphql/mutations";
 import { API, graphqlOperation, Auth } from 'aws-amplify';
 
-
-
 class CreatePost extends Component {
 
   state = {
@@ -35,8 +33,7 @@ class CreatePost extends Component {
   //all this do is to add items to instances 
   //retrieve the info and set it to the state 
   handleChangePost = event => this.setState({
-    [event.target.name] : event.target.value
-    
+    [event.target.name] : event.target.value;
   });
 
 
@@ -53,11 +50,12 @@ class CreatePost extends Component {
           postBody: this.state.postBody,
           createdAt: new Date().toISOString()
       };
+
       await API.graphql(graphqlOperation(createPost, { input }));
 
       //clean the state 
       this.setState({postTitle: "", postBody: ""});
-
+      
   } 
 
 
@@ -73,7 +71,6 @@ class CreatePost extends Component {
                 required
                 value={this.state.postTitle}//attach the state
                 onChange={this.handleChangePost} //we need this
-
               />
             <textarea
               type="text"

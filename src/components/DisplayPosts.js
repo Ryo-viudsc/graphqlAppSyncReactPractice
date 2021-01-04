@@ -106,6 +106,7 @@ class DisplayPosts extends Component {
     //state distraction 
     const {posts} = this.state;
 
+    
     return (
       posts.map((post) => {
         return (

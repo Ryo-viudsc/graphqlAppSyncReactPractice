@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import {Auth, API, graphqlOperation} from "aws-amplify";
 import {updatePost} from "../graphql/mutations";
 
-
 class EditPost extends Component {
-
 
   state = {
       show : false,
@@ -18,7 +16,6 @@ class EditPost extends Component {
         postBody: this.props.postBody
       }
   }
-
 
   handleModal = () => {
       this.setState({show : !this.state.show})
@@ -40,7 +37,6 @@ class EditPost extends Component {
            postTitle: this.state.postData.postTitle,
            postBody: this.state.postData.postBody
         }
-
 
         await API.graphql(graphqlOperation(updatePost, { input }));
 
@@ -78,7 +74,6 @@ class EditPost extends Component {
         postOwnerUsername: user.username
       })
     })
-
   };
 
   // called fragment 
@@ -107,15 +102,10 @@ class EditPost extends Component {
                                  placeholder="Edit here"
                                  name="postBody"
                                  value={this.state.postData.postBody}
-                                 onChange={this.handleBody}
-                                  
+                                 onChange={this.handleBody}   
                           />  
-
-
                           <button> Update Post </button>
-
                       </form>
-
                   </div>
               )}
             <button onClick={this.handleModal}> Edit </button>
