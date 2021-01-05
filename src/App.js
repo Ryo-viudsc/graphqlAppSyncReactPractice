@@ -6,7 +6,6 @@ import CreatePost from './components/CreatePost';
 import {withAuthenticator} from 'aws-amplify-react';
 
 
-
 function App() {
   return (
     <div className="App">
@@ -16,4 +15,4 @@ function App() {
   );
 }
 
-export default withAuthenticator(App, {includeGreegings: true});
+export default withAuthenticator(App, {includeGreetings: true});

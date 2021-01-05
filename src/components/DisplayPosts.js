@@ -4,7 +4,7 @@ import React, {Component} from "react";
 //you can see each function from the 
 //auto generated files "queries.js"
 import { listPosts } from "../graphql/queries";
-import { onCreatePost, onUpdatePost } from "../graphql/subscriptions";
+import { onCreatePost, onUpdateComment, onUpdatePost } from "../graphql/subscriptions";
 
 //for subscription 
 import {onDeletePost} from "../graphql/subscriptions";
@@ -79,6 +79,31 @@ class DisplayPosts extends Component {
                   ...posts.slice(index+1)
                 ]; 
                 this.setState({posts : updatePosts});
+              }
+            })
+
+        //it's like synchronize the comment data in the server 
+        //listener for the comments 
+        this.ceratePostCommentPostListener = API.graphql(graphqlOperation(onUpdateComment))
+            .subscribe({
+              next: commentData => {
+                  const createdComment = commentData.value.data.onCreateComment;
+                  let posts = [...this.state.posts];
+                  //loop through the all the posts 
+                  //and see inside of the comments 
+
+                  //for loop 
+                  for( let post of posts ){
+                    //if the createdComment is equivalent to one of the existing ones 
+                    if(createdComment.post.id === post.id)
+                    {
+                       post.comments.items.push
+                    }
+                  }
+                  //taking a look at a schema 
+
+
+
               }
             })
   }

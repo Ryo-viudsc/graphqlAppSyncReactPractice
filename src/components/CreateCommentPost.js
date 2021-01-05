@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import { Auth } from 'aws-amplify';
 import { createComment } from '../graphql/mutations';
-import { API, graphqlOperation } from 'aws-amplify';
+import { Auth , API, graphqlOperation } from 'aws-amplify';
 
 
 
@@ -16,7 +15,7 @@ class CreateCommentPost extends Component {
      }
 
 
-     componentWillMount = async () => {
+     componentDidMount = async () => {
        //first you need to get user names 
        //from the current userID 
 
@@ -26,7 +25,7 @@ class CreateCommentPost extends Component {
         await Auth.currentUserInfo()
          .then(user=>{
            
-            console.log("this is the inside of the user : " + user);
+            console.log("this is the inside of the user : " + user.username);
            
             this.setState({
               commentOwnerId: user.attributes.sub, 
@@ -51,7 +50,7 @@ class CreateCommentPost extends Component {
         const input = {
           commentPostId: this.props.postId,
           commentOwnerId: this.state.commentOwnerId,
-          commentOwnerUsername:  "test comment",  //this.state.commentOwnerUsername,
+          commentOwnerUsername:  this.state.commentOwnerusername,  //this.state.commentOwnerUsername,
           content: this.state.content,
           createdAt: new Date().toISOString()
          }

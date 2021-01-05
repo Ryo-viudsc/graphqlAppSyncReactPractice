@@ -12,8 +12,6 @@ class CreatePost extends Component {
   }
    
   componentDidMount = async () => {
-    //Todo 
-    //to get the current users 
 
     await Auth.currentUserInfo() // because it's promise  
           .then(user=>{
@@ -23,9 +21,7 @@ class CreatePost extends Component {
                 postOwnerId : user.attributes.sub,
                 postOwnerUsername: user.username
               })
-
           })
-
   };
 
   //UTILITY FUNCTION TO KEEP UPDATING THE STATE INFO 
