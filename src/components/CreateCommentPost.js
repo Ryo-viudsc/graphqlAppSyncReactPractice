@@ -16,7 +16,7 @@ class CreateCommentPost extends Component {
      }
 
 
-     componentDidMount = async () => {
+     componentWillMount = async () => {
        //first you need to get user names 
        //from the current userID 
 
@@ -47,7 +47,7 @@ class CreateCommentPost extends Component {
         event.preventDefault();
 
         const input = {
-         // commentPostId: this.props.postId,
+          commentPostId: this.props.postId,
           commentOwnerId: this.state.commentOwnerId,
           commentOwnerUsername: this.state.commentOwnerUsername,
           content: this.state.content,
