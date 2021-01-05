@@ -45,8 +45,9 @@ class CreateCommentPost extends Component {
      handleAddComment = async event => {
 
         event.preventDefault();
+
         const input = {
-          commentPostId: this.props.postId,
+         // commentPostId: this.props.postId,
           commentOwnerId: this.state.commentOwnerId,
           commentOwnerUsername: this.state.commentOwnerUsername,
           content: this.state.content,
