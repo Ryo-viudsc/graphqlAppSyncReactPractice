@@ -24,8 +24,10 @@ class CreateCommentPost extends Component {
        //user object inside of componentDidMount
 
         await Auth.currentUserInfo()
-         .then((user)=>{
-
+         .then(user=>{
+           
+            console.log("this is the inside of the user : " + user);
+           
             this.setState({
               commentOwnerId: user.attributes.sub, 
               commentOwnerusername: user.username
