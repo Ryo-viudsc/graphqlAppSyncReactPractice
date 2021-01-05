@@ -46,7 +46,7 @@ class CreateCommentPost extends Component {
 
         event.preventDefault();
         const input = {
-          commentPostId : this.props.postId,
+          id : this.props.postId,
           commentOwnerId: this.state.commentOwnerId,
           commentOwnerUsername: this.state.commentOwnerUsername,
           content: this.state.content,
@@ -54,7 +54,7 @@ class CreateCommentPost extends Component {
          }
 
          //here goes the API call to submit the new comment 
-         await API.graphql(graphqlOperation(createComment, {...input}));
+         await API.graphql(graphqlOperation(createComment, {input}));
           
 
          console.log("the end of handleAddComment")
