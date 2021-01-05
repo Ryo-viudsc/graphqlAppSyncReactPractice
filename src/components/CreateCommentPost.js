@@ -46,7 +46,6 @@ class CreateCommentPost extends Component {
 
         event.preventDefault();
         const input = {
-          id : this.props.postId,
           commentOwnerId: this.state.commentOwnerId,
           commentOwnerUsername: this.state.commentOwnerUsername,
           content: this.state.content,
