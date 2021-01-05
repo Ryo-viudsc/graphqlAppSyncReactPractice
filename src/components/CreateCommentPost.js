@@ -53,6 +53,8 @@ class CreateCommentPost extends Component {
           content: this.state.content,
           createdAt: new Date().toISOString()
          }
+ 
+        console.log(input);
 
          //here goes the API call to submit the new comment 
          await API.graphql(graphqlOperation(createComment, {input}));
