@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import { Auth } from 'aws-amplify';
 import { createComment } from '../graphql/mutations';
+import { API, graphqlOperation } from 'aws-amplify';
 
 
 
-class CreateCommentPost extends Compoent {
+class CreateCommentPost extends Component {
    
     //note that each comment  will have the comment ownerID 
     //one post can have a lot of comments 
@@ -24,9 +25,10 @@ class CreateCommentPost extends Compoent {
 
         await Auth.currentUserInfo()
          .then((user)=>{
+
             this.setState({
-              commentOwnerId: user.attribute.sub, 
-              commentOwnerusername: user.username
+              commentOwnerId: user.attributes.sub, 
+              commentOwnerusername: user.attributes.username
             })
          })
      }
@@ -43,30 +45,30 @@ class CreateCommentPost extends Compoent {
      handleAddComment = async event => {
 
         event.preventDefault();
-
         const input = {
           commentPostId : this.props.postId,
           commentOwnerId: this.state.commentOwnerId,
           commentOwnerUsername: this.state.commentOwnerUsername,
           content: this.state.content,
-          createAt: new Date().toISOString()
+          createdAt: new Date().toISOString()
          }
 
          //here goes the API call to submit the new comment 
          await API.graphql(graphqlOperation(createComment, {input}));
+          
+
+         console.log("the end of handleAddComment")
 
          //handleAddComment is invoked right after 
          //the submit button is clicked 
-
-
-         this.setState({content: ""});
-
+          this.setState({content: ""});
+          
      }
      
     
 
 
-    redner(){
+    render(){
       return(
           <div>
               <form 
@@ -84,6 +86,7 @@ class CreateCommentPost extends Compoent {
                         onChange={this.handleChangeContent}
                     />
                     <input 
+                      type="submit"
                       className="btn"
                       style={{ fontSize : '19px'}}
                       value="Add Comment"

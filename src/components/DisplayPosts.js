@@ -12,7 +12,7 @@ import {onDeletePost} from "../graphql/subscriptions";
 import { API, graphqlOperation } from 'aws-amplify';
 import DeletePost from "./DeletePost";
 import EditPost from "./EditPost";
-import CreateCommentPost from "./CreateCommentPost.js";
+import CreateCommentPost from "./CreateCommentPost";
 
 
 //API allows us to fetch the actual API that we've created 
