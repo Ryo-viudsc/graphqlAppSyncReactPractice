@@ -54,7 +54,7 @@ class CreateCommentPost extends Component {
          }
 
          //here goes the API call to submit the new comment 
-         await API.graphql(graphqlOperation(createComment, {input}));
+         await API.graphql(graphqlOperation(createComment, {...input}));
           
 
          console.log("the end of handleAddComment")
