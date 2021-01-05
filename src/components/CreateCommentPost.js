@@ -51,7 +51,7 @@ class CreateCommentPost extends Component {
         const input = {
           commentPostId: this.props.postId,
           commentOwnerId: this.state.commentOwnerId,
-          commentOwnerUsername: this.state.commentOwnerUsername,
+          commentOwnerUsername:  "test comment",  //this.state.commentOwnerUsername,
           content: this.state.content,
           createdAt: new Date().toISOString()
          }
